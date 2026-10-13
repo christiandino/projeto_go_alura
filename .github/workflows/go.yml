@@ -13,6 +13,7 @@ jobs:
 
   ci:
     runs-on: ubuntu-latest
+    environment: ci
     steps:
     - uses: actions/checkout@v4
 
@@ -31,6 +32,4 @@ jobs:
         args: controllers/ database/ models/ routes/
 
     - name: Test
-      run: DB_HOST= ${{ secrets.DB_HOST }} DB_PASSWORD={{ secrets.DB_PASSWORD }} DB_NAME= {{ secrets.DB_NAME }} DB_PORT= {{ secrets.DB_PORT }} go test -v main_test.go
-
-	
+      run: DB_HOST=${{ secrets.DB_HOST }} DB_USER=${{ secrets.DB_USER }} DB_PASSWORD=${{ secrets.DB_PASSWORD }} DB_NAME=${{ secrets.DB_NAME }} DB_PORT=${{ secrets.DB_PORT }} go test -v main_test.go
